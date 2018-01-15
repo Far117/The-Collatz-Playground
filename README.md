@@ -1,2 +1,6 @@
 # The-Collatz-Playground
-My adventures with the Collatz Conjecture, documented to learn LaTeX
+I wanted to learn about the type of thinking that comes with higher mathematics.
+
+I also wanted to learn LaTeX
+
+Why not write this?
