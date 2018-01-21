@@ -13,6 +13,11 @@
 	\xpretocmd{\subsection}{\needspace{15\baselineskip}}{}{}
 	\xpretocmd{\subsubsection}{\needspace{15\baselineskip}}{}{}
 	
+\usepackage[hidelinks]{hyperref} %clickable TOC
+\hypersetup{
+	allcolors=false
+}
+	
 
 %equation vs equation*
 %align vs align* (uses &)
@@ -20,7 +25,7 @@
 
 \title{"The Collatz Playground"}
 \author{Frank Rodriguez}
-\date{January 13th, 2018}
+\date{}
 
 \spacing{1.1}
 
@@ -37,10 +42,13 @@
 	
 	\section*{Preface}
 	
-		\paragraph{} Learning higher mathematics can be an intimidating prospect. The leap between the methodical calculations done in classrooms and the abstract thought required for "real" math can be quite large, especially if one has no idea how to put all of the theory into practice. 
-		\paragraph{} Upon hearing about something called the \textit{Collatz Conjecture}, I was smitten. The behavior is wonderfully complex. Stumping mathematicians of all skill levels for nearly a century, it is suspected of being completely impossible to solve. However, the entry point was incredibly simple, so much so that an elementary schooler could understand the concept!  I could not help but play with it.
-		\paragraph{} After spending a considerable amount of time on the problem, I am nowhere near solving it, but at the same time that is not really my goal. I believe that this is a lovely way to learn about the side of math rarely covered in grade school -- proofs. Throughout my foray, I have written many small proofs as tools for proving more complex behavior, and this is the first time I have had this level of experience with that. Collatz's playground has proved to be an enjoyable place indeed...
+		\paragraph{} Learning higher mathematics can be an intimidating prospect. The leap from methodical calculations done in classrooms to the abstract thought required for "real" math can be quite large, especially without experience in putting theory into practice.
+		 
+		\paragraph{} Upon learning of a statement known as the \textit{Collatz Conjecture}, I was smitten. The behavior is wonderfully complex. Stumping mathematicians of all skill levels for nearly a century, it is suspected of being completely impossible to solve. However, the entry point was incredibly simple, so much so that an elementary schooler could understand the concept!  I could not help but play with it.
+		
+		\paragraph{} After spending a considerable amount of time on the problem, I am nowhere near solving it; that is not my true goal. I believe this is a lovely way to learn of the side of math rarely covered in grade school: proofs. Throughout my foray, I have written many small proofs as tools for proving more complex behavior, and this is the first time I have had this level of experience with such concepts. Collatz's playground has proven to be an enjoyable place indeed...
 		\\ \\ \\
+		
 		\paragraph{} If anything comes of this, let it be that my fun inspires you to find your own playground. \\ \\ -Frank Rodriguez
 		
 		
@@ -54,7 +62,9 @@
 		
 			\subsubsection{What is the Collatz Conjecture?}
 			
-				\paragraph{} The conjecture itself is extremely simple: Pick any integer (a whole number) larger than 1. If this number is even, divide it by 2. If it is odd, multiply it by 3, then add 1. The resulting number is your new number. Perform the same decision-making process on it again. The Collatz Conjecture states that, no matter which number you chose (so long as it is an integer 1 or larger), you will eventually hit 1.
+				\paragraph{} The conjecture itself is extremely simple: Pick any integer (a whole number) larger than 1. If this number is even, divide it by 2. If it is odd, multiply it by 3, then add 1. The resulting number is your new number. Now, perform the same decision-making process on it again. 
+				
+				\paragraph{} The Collatz Conjecture states that, no matter which number you chose (so long as it is an integer 1 or larger), you will eventually hit 1.
 				
 				\begin{figure}[h] 
 					\begin{displaymath} 
@@ -70,21 +80,21 @@
 				\end{figure}
 				
 				
-				\paragraph{} This has been tested with every number up to $2\strut^{60}$ (and most likely above, by now), and they all reach 1 eventually. This indicates that the conjecture is \textit{probably} true, but to this day, no one has been able to create a formal proof, due in no part to a lack of effort! The problem posed is simply extremely difficult. How does one begin to tackle a question like this?
+				\paragraph{} This has been tested with a very large set of numbers,\footnote{I believe past $2\strut^{60}$.} and they all reach 1 eventually. This indicates that the conjecture is \textit{probably} true, but to this day, no one has been able to create a formal proof, due in no part to a lack of effort! The problem posed is simply extremely difficult. How does one begin to tackle a question such as this?
 				
 			\subsubsection{Find Something to Find}
 			
-				\paragraph{} If we assume that the conjecture is \textit{true}, then proving it from that perspective will require some impressively abstract thought. We would be searching more for pure \textit{ideas} rather than any sort of \textit{numerical} values. While undoubtedly interesting, I decided to try tackling this problem from the other end: what if it is false?
+				\paragraph{} If we assume the conjecture to be \textit{true}, then proving it will require some impressively abstract thought. We would be searching more for pure \textit{ideas}, rather than any sort of \textit{numerical} values. While undoubtedly interesting, I decided to try tackling this problem from the other end: what if it is false?
 				
-				\paragraph{} If the Collatz Conjecture is false, that gives us something to look for: a number that disproves the conjecture by never reaching 1, no matter how many iterations of the Collatz Function (figure \ref{function:collatz}) we pass it through.
+				\paragraph{} If the Collatz Conjecture is false, that gives us something to look for: a number that disproves the conjecture by never reaching 1, no matter how many iterations of the Collatz Function\footnote{I'll refer to the Collatz Function often: know that it refers to the piecewise function defined in figure \ref{function:collatz}} we pass it through.
 				
 		\subsection{The Magic Number}
 		
 			\subsubsection{The Identity}
 				
-				\paragraph{} The Collatz Conjecture is really only concerned with numbers $\geqslant 1$, so we have an established lower bound. It is quite clear that $1 = 1$, so it is of no concern. 2 follows an easy path, where $C(2) = 1$. We could keep going, but instead, let us think about numbers which might disprove the Collatz Conjecture by never approaching 1.
+				\paragraph{} The Collatz Conjecture is really only concerned with numbers $\geqslant 1$\footnote{This can be thought of as the \emph{type} of number we are working with. Types are incredibly important, as they offer implicit information for a problem. In the case of the Collatz Conjecture, we are discussing integers 1 and larger the overwhelming majority of the time.}, so there is indeed an established lower bound. It is quite clear that $1 = 1$, so it is of no concern. 2 follows an easy path, where $C(2) = 1$. We could keep going, but instead, let us think about numbers which might disprove the Collatz Conjecture by never approaching 1.
 				
-				\paragraph{} The first important realization is that there cannot exist a \textit{single} number which approaches 1 -- it must be a part of a larger chain. In other words, for any $n \geqslant 1$, $C(n) \neq n$. A repeating chain can be seen when starting from the number 1:
+				\paragraph{} The first important realization is that there cannot exist a \textit{single} number which approaches 1 -- it must be a part of a larger chain. In other words, for any $n \geqslant 1$, $C(n) \neq n$\footnote{A common theme seen is how mathematical syntax is capable of succinctly and explicitly expressing ideas which would be incredibly verbose in English. This statement can be read as follows: For any $n$ greater than or equal to 1, putting $n$ into the Collatz Function will never return our original $n$ -- it must be something different. It is a very good idea to become comfortable with statements such as these.}. A repeating chain can be seen when starting from the number 1:
 				
 				\begin{figure}[h]
 					\begin{align*}
@@ -99,7 +109,7 @@
 					\label{chain:1}
 				\end{figure}
 			
-			\paragraph{} If there are multiple numbers which disprove the conjecture, then logically one of them must be closer to 1 than all the rest. Let us call it $n$. Since $n$ is the lowest disproving number, then $C(n) > n$ must be true. The only way this is possible is if $n$ is odd, since an even number would get divided by 2.
+			\paragraph{} If there are multiple numbers which disprove the conjecture, then logically one of them must be closer to 1 than all the rest. Let us call it $n$. Since $n$ is the lowest disproving number, then $C(n) > n$ must be true. The only way this is possible is if $n$ is odd, since an even number would get divided by 2, thus becoming smaller.
 			
 			\paragraph{} To summarize, if a disproving number exists, then \textit{multiple} disproving numbers must exist. If multiple exist, then one must be the lowest one. If one is the lowest one, then it must be odd. That is enough information to begin reasoning about the number's behavior, as well as the behavior of the overall chain it belongs to. What does it take for a number to never touch 1?
 			
@@ -268,21 +278,21 @@
 			
 			\paragraph{} As $s$ increases, it will follow the pattern 0, 1, 2, 3, 4, 5, 6, 7, etc. This will be referred to as $P_2$. We wish to \textit{transform} $P_2$ into $P_1$ using some function, so that this function can be placed into the $x$ in $C$. I have found that the best approach is to take it one number at a time.
 			
-			\paragraph{} First, find a function which transforms the first element of $P_2$ (which we can refer to as $P_2(1)$) into $P_1(1)$. Then, see if this works for $P_2(2) \rightarrow P_1(2)$. If it does not, find a function which works for both $P_2(2) \rightarrow P_1(2)$ \textit{and} $P_2(1) \rightarrow P_1(1)$. If it does, keep checking until you have found reason to believe that your function works for the entire set $P_2(n) \rightarrow P_1(n)$. While the first guess is usually wrong, refining it so that it works for more and more transformations along your two sets will result in a function closer and closer to the answer (hopefully!).
+			\paragraph{} First, find a function which transforms the first element of $P_2$ (which we can refer to as $P_2(1)$) into $P_1(1)$. Then, see if this works for $P_2(2) \rightarrow P_1(2)$. If it does not, find a function which works for both $P_2(2) \rightarrow P_1(2)$ \textit{and} $P_2(1) \rightarrow P_1(1)$. If it does, keep checking until you have found reason to believe that your function works for the entire set $P_2(s) \rightarrow P_1(s)$. While the first guess is usually wrong, refining it so that it works for more and more transformations along your two sets will result in a function closer and closer to the answer (hopefully!).
 			
-			\paragraph{} Back to our tangible $P_1$ and $P_2$. In this case, $P_1(1)$ already equals $P_2(1)$, so our temporary function $t$ might just be $t(n) = n$. Does this definition of $t$ work for $P_2(2) \rightarrow P_1(2)$? It absolutely does not, $1 \neq 0$. Now, how can we define $t$ such that $t(1) = 0$ and $t(0) = 0$? One way might be $t(n) = 0$, and this certainly works. But what of $P_2(3) \rightarrow P_2(3)$? No, $0 \neq 1$.
+			\paragraph{} Back to our tangible $P_1$ and $P_2$. In this case, $P_1(1)$ already equals $P_2(1)$, so our temporary function $t$ might just be $t(n) = n$. Does this definition of $t$ work for $P_2(2) \rightarrow P_1(2)$? It absolutely does not, $1 \neq 0$. Now, how can we define $t$ such that $t(1) = 0$ and $t(0) = 0$? One way might be $t(s) = 0$, and this certainly works. But what of $P_2(3) \rightarrow P_2(3)$? No, $0 \neq 1$.
 			
 			\paragraph{} Now we need to define $t$ such that $t(2) = 1$ and $t(1) = 0$ and $t(0) = 0$. One might be tempted to use a piecewise function here, and it certainly will work, but be wary of using piecewise functions as a crutch. Not only can they be quite difficult to work with mathematically (many lend themselves to \textit{irreversible functions}: functions where knowing the output alone is not enough to discern the input), but they can be infinitely expanded, meaning we technically can come up with a rule for turning every element of $P_2$ into $P_1$ in isolation. That is, assuming we could come up with infinite rules. We clearly cannot, and it is required for this, so there must be another way.
 			
 			\paragraph{} Feel free to stop here for a while and work on it for a little bit. I, however, will carry on.
 			
-			\paragraph{} If we floor each element in $P_2$, we will not actually do anything, since each element is already an integer. Therefore, we have to manipulate it in some way before flooring it. We could take a little bit off, say, 0.1, and that would make each term collapse to one less than it. If we define $t$ as $t(n) = \lfloor n - 0.1 \rfloor$, then $t(1) = 0$, just as expected. However, $t(0)$ then equals $-1$.
+			\paragraph{} If we floor each element in $P_2$, we will not actually do anything, since each element is already an integer. Therefore, we have to manipulate it in some way before flooring it. We could take a little bit off, say, 0.1, and that would make each term collapse to one less than it. If we define $t$ as $t(s) = \lfloor s - 0.1 \rfloor$, then $t(1) = 0$, just as expected. However, $t(0)$ then equals $-1$.
 			
-			\paragraph{} In order to respect that 0, we need an operation which will not change it. Addition and subtraction will, but multiplication and division are two operations which will not. Multiplying our number, though, will result in a larger one, though. A property we can see is that $P_1(n) \leqslant P_2(n)$. Therefore, division would be better suited.
+			\paragraph{} In order to respect that 0, we need an operation which will not change it. Addition and subtraction will, but multiplication and division are two operations which will not. Multiplying our number, though, will result in a larger one, though. A property we can see is that $P_1(s) \leqslant P_2(s)$. Therefore, division would be better suited.
 			
-			\paragraph{} Defining $t$ as $t(n) = \lfloor \frac{n}{2} \rfloor$ would produce interesting results. $t(0)$ is still 0. $t(1)$ is also 0. $t(2)$ is now 1, and $t(3)$ is also 1. Continuing the tests seems to show that this definition of $t$ seems to correctly transform $P_2(n)$ into $P_1(n)$. Can we rationalize this behavior to try and prove that it will work for all infinite elements in $P_1$ and $P_2$?
+			\paragraph{} Defining $t$ as $t(s) = \lfloor \frac{s}{2} \rfloor$ would produce interesting results. $t(0)$ is still 0. $t(1)$ is also 0. $t(2)$ is now 1, and $t(3)$ is also 1. Continuing the tests seems to show that this definition of $t$ seems to correctly transform $P_2(s)$ into $P_1(s)$. Can we rationalize this behavior to try and prove that it will work for all infinite elements in $P_1$ and $P_2$?
 			
-			\paragraph{} Well... the number is supposed to change every other element in $P_1$. That is, it changes every 2 elements. Since we are flooring $\frac{n}{2}$, $n$ has to increase by 2 before the number changes! If we wanted it to change every third element, we could instead floor $\frac{n}{3}$. It checks out!
+			\paragraph{} Well... the number is supposed to change every other element in $P_1$. That is, it changes every 2 elements. Since we are flooring $\frac{s}{2}$, $n$ has to increase by 2 before the number changes! If we wanted it to change every third element, we could instead floor $\frac{s}{3}$. It checks out!
 			
 			\paragraph{} We no longer need $t$ as a function. Instead, we can insert its definition directly into $C$'s skeletal definition, giving us $C_s = 2\strut^{\lfloor \frac{s}{2} \rfloor}$. Testing this filled-in $C$ against the expected values in figure \ref{table:sabc} shows a match. $C$ is solved! We can now add to our skeletal definition of $f$:
 			
@@ -296,21 +306,21 @@
 			
 			\paragraph{} Therefore, we can start to outline $A$ as $A_s = 3\strut^x$. Careful observation shows that the patterns for exponents are only \textit{similar} to $C$'s -- they are not an exact match. Checking the table shows that the exponents will form a $P_1$ of 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5.... Our $P_2$, however, is identical because $s$ follows the same pattern for all 3 generators: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10....
 			
-			\paragraph{} Now the question begins again: how do we define some function $t$ such that $t(P_2(n)) = t(P_1(n))$? Since $C$ and $A$ have such a similar pattern, we can copy $C$'s $t$ definition over and use it as our starting point: $t(n) = \lfloor \frac{n}{2} \rfloor$. Testing it, however, shows that it indeed does not work. This is expected, since the patterns are different.
+			\paragraph{} Now the question begins again: how do we define some function $t$ such that $t(P_2(s)) = t(P_1(s))$? Since $C$ and $A$ have such a similar pattern, we can copy $C$'s $t$ definition over and use it as our starting point: $t(s) = \lfloor \frac{s}{2} \rfloor$. Testing it, however, shows that it indeed does not work. This is expected, since the patterns are different.
 			
 			\paragraph{} Still, note that while the patterns are different, they differ only mildly. In fact, $A$'s $P_1$ is identical to $C$'s $P_1$, except that it seems to be shifted to the left by one element -- it is missing that first 0. Therefore, it changes every other element, much like $C$, but its change is staggered to be one off from $C$. In other words, $A$ changes, then $C$, then $A$, then $C$, etc.
 			
 			\paragraph{} Now is a good time to try it on your own if you would like.
 			
 			
-			\paragraph{} This opposite behavior makes me wonder if it simply uses the opposite function, ceiling, instead of floor: $t(n) = \lceil \frac{n}{2} \rceil$. Indeed, it seems to work beautifully, but we need to make sure.
+			\paragraph{} This opposite behavior makes me wonder if it simply uses the opposite function, ceiling, instead of floor: $t(s) = \lceil \frac{s}{2} \rceil$. Indeed, it seems to work beautifully, but we need to make sure.
 			
-			\paragraph{} Since $t$ is now rounding up rather than down, as soon as the term hits $\frac{1}{2}$, it will be set to 1 instead of staying at 0 as it does floor's case. However, $\lceil 0 \rceil = 0$, so there is no danger there. We are keeping $n$ divided by 2 for the same reasons as when solving for $C$, so that it changes every other time. However, for it to change every other time and also have that second element change, its "schedule" for changing must be flipped in precisely the way we are looking for. It seems like this checks out, as well!
+			\paragraph{} Since $t$ is now rounding up rather than down, as soon as the term hits $\frac{1}{2}$, it will be set to 1 instead of staying at 0 as it does floor's case. However, $\lceil 0 \rceil = 0$, so there is no danger there. We are keeping $s$ divided by 2 for the same reasons as when solving for $C$, so that it changes every other time. However, for it to change every other time and also have that second element change, its "schedule" for changing must be flipped in precisely the way we are looking for. It seems like this checks out, as well!
 			
-			\paragraph{} Plugging $t$'s body back into our $A$ rough draft, we find $A_s = 3\strut^{\lceil \frac{n}{2} \rceil}$. Testing it against the expected values in figure \ref{table:sabc} shows that this is correct, and our reasoning about each component is sound. Therefore, we can consider $A$ solved, and plug it into $f$'s definition:
+			\paragraph{} Plugging $t$'s body back into our $A$ rough draft, we find $A_s = 3\strut^{\lceil \frac{s}{2} \rceil}$. Testing it against the expected values in figure \ref{table:sabc} shows that this is correct, and our reasoning about each component is sound. Therefore, we can consider $A$ solved, and plug it into $f$'s definition:
 			
 			\begin{equation*}
-				f(n, s) = \frac{3\strut^{\lceil \frac{n}{2} \rceil} n + B}{2\strut^{\lfloor \frac{n}{2} \rfloor}}
+				f(n, s) = \frac{3\strut^{\lceil \frac{s}{2} \rceil} n + B}{2\strut^{\lfloor \frac{s}{2} \rfloor}}
 			\end{equation*}
 			
 			\paragraph{} We are making quite the interesting function here...
@@ -328,7 +338,7 @@
 			
 			\paragraph{} $B$ cannot be influenced by the even changes. In fact, it seems like \textit{only} $C$ is influenced by them. My reasoning is figure \ref{chain:simplified}: if the denominator had factors in the numerator, they could be factored out (note that this applies only to this general form of $\frac{An + B}{C}$). Since the denominator grows unabated, it must have no bearing on the numerator. Even if this was only true for the first few terms, it still shows that it must only be the odd terms which influence $B$, at least at the beginning.
 			
-			\paragraph{} Repeatedly calling $3n + 1$ on a number surely causes it to grow exponentially, as seen in $B$'s case. Indeed, each time a term grows, we can see that it grows by a factor larger than 3 of the previous one. In other words, when considering only the points of change, it seems to be true that $B_n > 3B_{n-1}$.
+			\paragraph{} Repeatedly calling $3n + 1$ on a number surely causes it to grow exponentially, as seen in $B$'s case. Indeed, each time a term grows, we can see that it grows by a factor larger than 3 of the previous one. In other words, when considering only the points of change, it seems to be true that $B_s > 3B_{s-1}$.
 			
 			\paragraph{} This hints at something nasty, though: if $B$ really does follow this behavior, then calculating $B_s$ would require calculating $B_{s-1}$, which would require $B_{s-2}$, which would require $B_{s-3}$, etc, all the way down to $B_0$. When calculating a term requires calculating the entire sequence before it, it is known as a \textit{recursive} sequence. For reasons which will become clear shortly, this is unfortunate.
 			
@@ -340,7 +350,7 @@
 			
 			\paragraph{} So, let us look back to figure \ref{chain:unsimplified} to find this rule of increment. For reasons mentioned earlier, an even iteration does not directly influence $B$, so it must change on the odd iterations. Comparing figure \ref{chain:unsimplified} to the table of values given in figure \ref{table:sabc}, and even the simplified version given in figure \ref{chain:simplified} corroborates this. $B$ changes on the odds, with $A$.
 			
-			\paragraph{} The odd branch of the Collatz Function turns $n$ into $3n+1$. We can suspect that the $3$ is involved because $B_n > 3B_{n-1}$, but a relation ($>$) is not the same as the entire rule (which will instead have a $=$ sign). What about the $+1$? What effects does it have on $B$?
+			\paragraph{} The odd branch of the Collatz Function turns $n$ into $3n+1$. We can suspect that the $3$ is involved because $B_s > 3B_{s-1}$, but a relation ($>$) is not the same as the entire rule (which will instead have a $=$ sign). What about the $+1$? What effects does it have on $B$?
 			
 			\paragraph{} We can find an interesting truth through some arithmetic. Every odd term, we start with $\frac{An + B}{C}$ and end with $3\left(\frac{An + B}{C}\right) + 1$. This can be rewritten as $\frac{3(An + B)}{C} + 1$. We care about what happens to $B$, so let us distribute the 3: $\frac{3An + 3B}{C} + 1$. This proves that $B$ indeed gets multiplied by 3. 
 			
@@ -373,7 +383,7 @@
 			
 			\paragraph{} We are only looking at the points of change for now, so the sequence we are emulating is 0, 1, 5, 19, 65, 211, etc. We will also consider the $C$ values at these points: 1, 1, 2, 4, 8, 16, and so on. We have $B_0$ set, so we can remove the first terms from both of these chains. 
 			
-			\paragraph{} What happens if we follow the strictly follow the pattern we found earlier, $3B + C$? We would end up with $B_n = 3B_{n-1} + C_n$. The $n-1$ is there because it is "3 times the previous $B$." Does this work?
+			\paragraph{} What happens if we follow the strictly follow the pattern we found earlier, $3B + C$? We would end up with $B_s = 3B_{s-1} + C_n$. The $s-1$ is there because it is "3 times the previous $B$." Does this work?
 			
 			\paragraph{} Let us find out. $B_0$ is just 0, no need to test anything. $B_1$ would be $3(0) + C_1 = 0 + 1 = 1$, and indeed it is. $B_2 = 3(1) + C_2 = 3 + 2 = 5$, again correct. In fact, they all match. More importantly, this makes sense because the behavior matches what we expected it to be when we found the $3B + C$ equation.
 			
@@ -393,14 +403,14 @@
 				\caption{$B$'s behavior}
 			\end{figure}
 		
-			\paragraph{} There seem to be two possibilities: Either $B_n$ is $B_{n-1}$ or $B_n$ is $3B_{n-1} + C_n$. Because there are only two possibilities, we can wrap this in a piecewise function for the purpose of conceptualizing what we are working with better. While probably a clerical nightmare, we shall name this function $B$ of course. It can be defined as follows:
+			\paragraph{} There seem to be two possibilities: Either $B_s$ is $B_{s-1}$ or $B_s$ is $3B_{s-1} + C_s$. Because there are only two possibilities, we can wrap this in a piecewise function for the purpose of conceptualizing what we are working with better. While probably a clerical nightmare, we shall name this function $B$ of course. It can be defined as follows:
 			
 			\begin{figure}[h]
 				\begin{equation*}
 					B(n) = \begin{cases}
 						0 &\text{n = 0}\\
-						B(n - 1) &n > 0 \text{ and n is even}\\
-						3B(n - 1) + C_n &\text{n is odd}
+						B(s - 1) &s > 0 \text{ and s is even}\\
+						3B(s - 1) + C_n &\text{s is odd}
 					\end{cases}
 				\end{equation*}
 				
@@ -412,7 +422,7 @@
 			
 			\begin{figure}[h]
 				\begin{equation*}
-					f(n, s) = \frac{3\strut^{\lceil \frac{n}{2} \rceil} n + B(s)}{2\strut^{\lfloor \frac{n}{2} \rfloor}}
+					f(n, s) = \frac{3\strut^{\lceil \frac{s}{2} \rceil} n + B(s)}{2\strut^{\lfloor \frac{s}{2} \rfloor}}
 				\end{equation*}
 				
 				\caption{A definition of $f$}
@@ -477,21 +487,21 @@
 				\label{fig:bAggressive}
 			\end{figure}
 		
-			\paragraph{} Now we can see the true underlying pattern. For those of you with moderate experience in algebra, this structure should be ringing bells. It is \textit{similar} to a binomial expansion of $(3 + 2)$, but not quite. In a binomial expansion, Pascal's Triangle is involved with the summation. However, we have no need for that here, so we can remove it from the summation notation, leaving us with the generalized form $\sum\limits_{i = 0}^n (x\strut^{n-i}y\strut^i)$. Therefore, when we plug in the pertinent values, we come up with $B_n = \sum\limits_{i = 0}^n (3\strut^{n-i}2\strut^i)$.
+			\paragraph{} Now we can see the true underlying pattern. For those of you with moderate experience in algebra, this structure should be ringing bells. It is \textit{similar} to a binomial expansion of $(3 + 2)$, but not quite. In a binomial expansion, Pascal's Triangle is involved with the summation. However, we have no need for that here, so we can remove it from the summation notation, leaving us with the generalized form $\sum\limits_{i = 0}^s (x\strut^{s-i}y\strut^i)$. Therefore, when we plug in the pertinent values, we come up with $B_s = \sum\limits_{i = 0}^s (3\strut^{s-i}2\strut^i)$.
 			
 			\paragraph{} This results in the desired behavior, and has the benefit of being a non-recursive solution. It is certainly hefty, but vastly less so than the previous definition. All that is left is setting it to match the original $B$ sequence, repeating parts and all.
 			
 			\paragraph{} Note: Astute readers will notice that this is not a complete solution. The original $B$ sequence returns a 0 when $s$ is 0. This, however, is incapable of returning a 0. Therefore, it is a solution for all $s > 0$, rather than all $s$ values. Plugging it into $f$ would mean that $f$ is only a solution for $s > 0$ by consequence. While unfortunate, and $s$ of 0 is expected to simply return $n$, so we are not losing too much functionality. In other words, a total solution would be fantastic, but is not strictly required.
 			
-			\paragraph{} On topic, the now we will our newfound definition match the actual sequence's behavior. We will set $P_1$ to be the expected $n$ values in our definition: 0, 0, 1, 1, 2, 2, 3, 3, 4, 4,.... $P_2$ will be $s$'s sequence, omitting the first 0 because our function $f$ is now no longer concerned with it: 1, 2, 3, 4, 5, 6, 7,...
+			\paragraph{} On topic, the now we will our newfound definition match the actual sequence's behavior. We will set $P_1$ to be the expected output values in our definition: 0, 0, 1, 1, 2, 2, 3, 3, 4, 4,.... $P_2$ will be $s$'s sequence, omitting the first 0 because our function $f$ is now no longer concerned with it: 1, 2, 3, 4, 5, 6, 7,...
 			
-			\paragraph{} If you would like to try and find the $P_2(n) \rightarrow P_1(n)$ function, now is a good stopping point.
+			\paragraph{} If you would like to try and find the $P_2(s) \rightarrow P_1(s)$ function, now is a good stopping point.
 			
-			\paragraph{} We must find some formula $t$ which will convert $P_2 \rightarrow P_1$, as has been the standard procedure. The pattern of alternation matches $C$'s, so we can start with its definition and modify it as necessary: $t(n) = \lfloor \frac{n}{2} \rfloor$. This works for $P_2(1) \rightarrow P_1(1)$ but not $P_2(2) \rightarrow P_1(2)$. 
+			\paragraph{} We must find some formula $t$ which will convert $P_2 \rightarrow P_1$, as has been the standard procedure. The pattern of alternation matches $C$'s, so we can start with its definition and modify it as necessary: $t(s) = \lfloor \frac{s}{2} \rfloor$. This works for $P_2(1) \rightarrow P_1(1)$ but not $P_2(2) \rightarrow P_1(2)$. 
 			
-			\paragraph{} Recall that we shifted the sequence of $s$ by 1 to the left when we omitted 0. What if we try correcting for that? $t(n) = \lfloor \frac{n-1}{2} \rfloor $. This indeed works, and the reason why is sound.
+			\paragraph{} Recall that we shifted the sequence of $s$ by 1 to the left when we omitted 0. What if we try correcting for that? $t(s) = \lfloor \frac{s-1}{2} \rfloor $. This indeed works, and the reason why is sound.
 			
-			\paragraph{} Now we simply plug this $t$ in instead of $n$ in our definition of $B$ to find that $B_n = \sum\limits_{i=0}^{\lfloor \frac{n-1}{2} \rfloor} \left[3\strut^{\lfloor \frac{n-1}{2} \rfloor - i}2\strut^i \right]$. Next, plug this in to our $f$:
+			\paragraph{} Now we simply plug this $t$ in instead of $s$ in our definition of $B$ to find that $B_s = \sum\limits_{i=0}^{\lfloor \frac{s-1}{2} \rfloor} \left[3\strut^{\lfloor \frac{s-1}{2} \rfloor - i}2\strut^i \right]$. Next, plug this in to our $f$:
 			
 			\begin{figure}[h]
 				\begin{equation*}
@@ -628,7 +638,7 @@
 				odd + even + ... + even
 			\end{figure*}
 		
-			\paragraph{} What do we know about the addition of odd and even number? Well, we can strictly define the behavior. All even numbers can be rewritten as $2(n)$ by definition. Therefore, an even plus an even can be written as $2(n) + 2(m) = 2(n + m)$, which is also even by definition. An odd number can be rewritten, this time as $2(n) + 1$, so an odd plus an odd can be written as $2(n) + 1 + 2(m) + 1 = 2(n) + 2(m) + 2 = 2(n + m + 2)$, which is again even by definition. Finally, an even plus an odd is $2(n) + 2(m) + 1 = 2(n + m) + 1$, which is odd by definition.
+			\paragraph{} What do we know about the addition of odd and even number? Well, we can strictly define the behavior. All even numbers can be rewritten as $2n$ by definition. Therefore, an even plus an even can be written as $2n + 2m = 2(n + m)$, which is also even by definition. An odd number can be rewritten, this time as $2n + 1$, so an odd plus an odd can be written as $2n + 1 + 2m + 1 = 2n + 2m + 2 = 2(n + m + 1)$, which is again even by definition. Finally, an even plus an odd is $2n + 2m + 1 = 2(n + m) + 1$, which is odd by definition.
 			
 			\paragraph{} Even more intuitively, an even number is just a bunch of twos, whereas an odd number is a bunch of twos and a one. Two even numbers will just be more twos. Two odd numbers will be a bunch of twos and two ones, which is just a bunch of twos. Only an even and an odd result in a bunch of twos and a one.
 			
@@ -638,7 +648,7 @@
 		
 			\paragraph{} Now we can learn something about our function. Since $B$ is always odd and $An$'s odd/even status depends solely on $n$, we have two possible outcomes. The first is that $An + B$ is odd, the second is that it is even. The former occurs only when $n$ is even.
 			
-			\paragraph{} Recall that this is the question we are currently trying to solve/ We now know that $An + B$ is odd only when $n$ is even. This tells us that $f(n, s)$ is guaranteed to be a fraction when $n$ is even. The next question is "when?"
+			\paragraph{} Recall that this is the question we are currently trying to solve. We now know that $An + B$ is odd only when $n$ is even. This tells us that $f(n, s)$ is guaranteed to be a fraction when $n$ is even. The next question is "when?"
 			
 			\paragraph{} It is tempting to assert that $k = 1$ for all even numbers, but a test shows this not to be the case. After all, 2's $k$ was 2. Instead, remember how $C$ is defined: $2\strut^{\lfloor \frac{s}{2} \rfloor}$. While yes, it is a power of two, it can be shown to be $2\strut^0$ when $s < 2$. Since this is our denominator, and all integers divided by 1 are also integers, then we cannot have a fraction if the denominator is 1. The denominator only changes to 2 when $s \geqslant 2$.
 			
@@ -668,9 +678,9 @@
 				\label{fig:nk}
 			\end{figure}
 		
-			\paragraph{} There are quite a few patterns here. At the very least, something seems methodical about it. A repeating pattern for $k$ seems to be 4, 6, 4, 8, although it gets broken up with an odd 10, 12, or 14. Speaking of that, some of these have quite large $k$ values. 63's $k$ is 14, while 61's is 4. Why are they so close and yet so different?
+			\paragraph{} There are quite a few patterns here. At the very least, something seems methodical about it. A repeating pattern for $k$ seems to be 4, 6, 4, 8, although it gets broken up with an odd 10, 12, or 14. Speaking of which, some of these have quite large $k$ values. 63's $k$ is 14, while 61's is 4. Why are they so close and yet so different?
 			
-			\paragraph{} Let us keep a running tally of which $n$s has the highest $k$ values. The first is 1, with a $k$ of 4. Immediately after, it is bested by 3, with a $k$ of 6. Then 7 with a $k$ of 8. Then 15 with a $k$ of 10...
+			\paragraph{} Let us keep a running tally of which $n$s have the highest $k$ values. The first is 1, with a $k$ of 4. Immediately after, it is bested by 3, with a $k$ of 6. Then 7 with a $k$ of 8. Then 15 with a $k$ of 10...
 			
 			\paragraph{} Now hold on, these $k$ values seem to be counting up by 2. Let us take these in isolation:
 			
@@ -690,7 +700,7 @@
 			
 			\paragraph{} By asserting that $k = 2(m + 1)$ when $n = 2\strut^m - 1$, we are making a very strong statement about numbers which cannot exist. Therefore, we can plug this information into $f$ to come up with a modified form of it, we can call it $g$.
 			
-			\paragraph{} First, what are we plugging in? $f(2n-1, 2(n + 1))$ should always return a fraction, so let us place these values into $f$ directly to define $g$:
+			\paragraph{} First, what are we plugging in? $f(2\strut^n-1, 2(n + 1))$ should always return a fraction, so let us place these values into $f$ directly to define $g$:
 			
 			\begin{equation*}
 				g(n) = \frac{3\strut^{\lceil \frac{2(n + 1)}{2} \rceil} (2\strut^n - 2) + 
@@ -725,10 +735,22 @@
 			\end{figure}
 			\newpage %aligns above figure
 			
-			\paragraph{} Now, we can begin the task of proving the existence of this number.
+			\paragraph{} Now, we can begin the task of proving the existence of this number. Since the numerator takes the form of "an odd number times an odd number + an odd number," it will always be even. This means we cannot use our previous trick. We will need to work with more complex rules to tackle this.
+			
+		\subsubsection{Geometric Sequences}
+			
+			\paragraph{} It would be extremely useful to break apart that summation. Using the rules of summations, we can indeed simplify it a bit. Consider:
+			
+			\begin{equation*}
+				\sum\limits_{i=0}^n 2i
+			\end{equation*}
+			
+			\paragraph{} 
 			
 			
-						
+			
+			
+			
 						
 		
 \end{document}
